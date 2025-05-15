@@ -12,24 +12,20 @@
       max-width: 900px;
       margin: auto;
     }
-
-    h1, h2 {
-      color: #004080;
+    h1 {
       text-align: center;
+      color: #333;
     }
-
     canvas {
+      max-width: 600px;
+      margin: 0 auto 30px;
       display: block;
-      margin: 0 auto 40px auto;
-      max-width: 500px;
     }
-
     table {
       border-collapse: collapse;
       width: 100%;
       margin-top: 20px;
     }
-
     th, td {
       border: 1px solid #ccc;
       width: 14.28%;
@@ -37,7 +33,6 @@
       text-align: center;
       vertical-align: top;
     }
-
     td a {
       display: block;
       padding: 5px;
@@ -45,33 +40,25 @@
       font-weight: bold;
       text-decoration: none;
     }
-
     td a:hover {
       background: #e0f0ff;
       border-radius: 4px;
     }
-
     caption {
       font-size: 1.5em;
       margin-bottom: 10px;
       font-weight: bold;
       color: #004080;
     }
-
-    a.back {
-      display: block;
-      text-align: center;
-      margin-top: 30px;
-      color: #333;
-    }
   </style>
 </head>
 <body>
   <h1>2025年5月のダーツ日記</h1>
 
-  <h2>📊 2025年5月の成績まとめ</h2>
-  <canvas id="monthlyRadarChart" width="400" height="400"></canvas>
+  <!-- 📊 レーダーチャート -->
+  <canvas id="myRadarChart"></canvas>
 
+  <!-- 📅 カレンダー -->
   <table>
     <caption>2025年5月</caption>
     <thead>
@@ -80,49 +67,41 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td></td><td></td><td></td><td></td><td><a href="2025-05-01.html">1</a></td><td><a href="2025-05-02.html">2</a></td><td><a href="2025-05-03.html">3</a></td>
-      </tr>
-      <tr>
-        <td><a href="2025-05-04.html">4</a></td><td><a href="2025-05-05.html">5</a></td><td><a href="2025-05-06.html">6</a></td><td><a href="2025-05-07.html">7</a></td><td><a href="2025-05-08.html">8</a></td><td><a href="2025-05-09.html">9</a></td><td><a href="2025-05-10.html">10</a></td>
-      </tr>
-      <tr>
-        <td><a href="2025-05-11.html">11</a></td><td><a href="2025-05-12.html">12</a></td><td><a href="2025-05-13.html">13</a></td><td><a href="2025-05-14.html">14</a></td><td><a href="2025-05-15.html">15</a></td><td><a href="2025-05-16.html">16</a></td><td><a href="2025-05-17.html">17</a></td>
-      </tr>
-      <tr>
-        <td><a href="2025-05-18.html">18</a></td><td><a href="2025-05-19.html">19</a></td><td><a href="2025-05-20.html">20</a></td><td><a href="2025-05-21.html">21</a></td><td><a href="2025-05-22.html">22</a></td><td><a href="2025-05-23.html">23</a></td><td><a href="2025-05-24.html">24</a></td>
-      </tr>
-      <tr>
-        <td><a href="2025-05-25.html">25</a></td><td><a href="2025-05-26.html">26</a></td><td><a href="2025-05-27.html">27</a></td><td><a href="2025-05-28.html">28</a></td><td><a href="2025-05-29.html">29</a></td><td><a href="2025-05-30.html">30</a></td><td><a href="2025-05-31.html">31</a></td>
-      </tr>
+      <tr><td></td><td></td><td></td><td></td><td><a href="2025-05-01.html">1</a></td><td><a href="2025-05-02.html">2</a></td><td><a href="2025-05-03.html">3</a></td></tr>
+      <tr><td><a href="2025-05-04.html">4</a></td><td><a href="2025-05-05.html">5</a></td><td><a href="2025-05-06.html">6</a></td><td><a href="2025-05-07.html">7</a></td><td><a href="2025-05-08.html">8</a></td><td><a href="2025-05-09.html">9</a></td><td><a href="2025-05-10.html">10</a></td></tr>
+      <tr><td><a href="2025-05-11.html">11</a></td><td><a href="2025-05-12.html">12</a></td><td><a href="2025-05-13.html">13</a></td><td><a href="2025-05-14.html">14</a></td><td><a href="2025-05-15.html">15</a></td><td><a href="2025-05-16.html">16</a></td><td><a href="2025-05-17.html">17</a></td></tr>
+      <tr><td><a href="2025-05-18.html">18</a></td><td><a href="2025-05-19.html">19</a></td><td><a href="2025-05-20.html">20</a></td><td><a href="2025-05-21.html">21</a></td><td><a href="2025-05-22.html">22</a></td><td><a href="2025-05-23.html">23</a></td><td><a href="2025-05-24.html">24</a></td></tr>
+      <tr><td><a href="2025-05-25.html">25</a></td><td><a href="2025-05-26.html">26</a></td><td><a href="2025-05-27.html">27</a></td><td><a href="2025-05-28.html">28</a></td><td><a href="2025-05-29.html">29</a></td><td><a href="2025-05-30.html">30</a></td><td><a href="2025-05-31.html">31</a></td></tr>
     </tbody>
   </table>
 
-  <a class="back" href="index.html">← トップページへ戻る</a>
+  <p style="text-align: center;"><a href="index.html">← トップページへ戻る</a></p>
 
   <script>
-    const ctx = document.getElementById('monthlyRadarChart').getContext('2d');
-
+    const ctx = document.getElementById('myRadarChart');
     new Chart(ctx, {
       type: 'radar',
       data: {
-        labels: ['レーティング', '01', 'クリケット', 'カウントアップ', '勝率'],
+        labels: ['レーティング', '01 PPD', 'クリケット MPR', 'カウントアップ', '勝率'],
         datasets: [{
-          label: '2025年5月平均',
-          data: [10.2, 85, 3.1, 720, 65], // ← 実際の平均値に変更してください
+          label: '2025年5月',
+          data: [20, 34.5, 3.8, 720, 65], // ← ここを編集（例）
           backgroundColor: 'rgba(0, 123, 255, 0.2)',
           borderColor: 'rgba(0, 123, 255, 1)',
-          pointBackgroundColor: 'rgba(0, 123, 255, 1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(0, 123, 255, 1)'
+          borderWidth: 2,
+          pointBackgroundColor: 'rgba(0, 123, 255, 1)'
         }]
       },
       options: {
+        responsive: true,
         scales: {
           r: {
-            suggestedMin: 0,
-            suggestedMax: 100,
+            min: 0,
+            max: 1000, // 最大値調整（必要に応じて）
+            ticks: {
+              stepSize: 100,
+              color: '#333'
+            },
             pointLabels: {
               font: {
                 size: 14
