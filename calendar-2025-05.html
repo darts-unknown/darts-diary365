@@ -4,7 +4,26 @@
   <meta charset="UTF-8">
   <title>2025年5月のダーツ日記カレンダー</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1, h2 {
+      color: #004080;
+      text-align: center;
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto 40px auto;
+      max-width: 500px;
+    }
+
     table {
       border-collapse: collapse;
       width: 100%;
@@ -24,6 +43,7 @@
       padding: 5px;
       color: #0066cc;
       font-weight: bold;
+      text-decoration: none;
     }
 
     td a:hover {
@@ -37,12 +57,20 @@
       font-weight: bold;
       color: #004080;
     }
+
+    a.back {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      color: #333;
+    }
   </style>
 </head>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <body>
   <h1>2025年5月のダーツ日記</h1>
+
+  <h2>📊 2025年5月の成績まとめ</h2>
+  <canvas id="monthlyRadarChart" width="400" height="400"></canvas>
 
   <table>
     <caption>2025年5月</caption>
@@ -70,6 +98,45 @@
     </tbody>
   </table>
 
-  <p><a href="index.html">← トップページへ戻る</a></p>
+  <a class="back" href="index.html">← トップページへ戻る</a>
+
+  <script>
+    const ctx = document.getElementById('monthlyRadarChart').getContext('2d');
+
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['レーティング', '01', 'クリケット', 'カウントアップ', '勝率'],
+        datasets: [{
+          label: '2025年5月平均',
+          data: [10.2, 85, 3.1, 720, 65], // ← 実際の平均値に変更してください
+          backgroundColor: 'rgba(0, 123, 255, 0.2)',
+          borderColor: 'rgba(0, 123, 255, 1)',
+          pointBackgroundColor: 'rgba(0, 123, 255, 1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(0, 123, 255, 1)'
+        }]
+      },
+      options: {
+        scales: {
+          r: {
+            suggestedMin: 0,
+            suggestedMax: 100,
+            pointLabels: {
+              font: {
+                size: 14
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
