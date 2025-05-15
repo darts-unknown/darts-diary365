@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>2025-05-25のダーツ日記</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+    input, textarea {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 8px;
+      font-size: 1em;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+    }
+    canvas {
+      max-width: 600px;
+      margin-top: 20px;
+    }
+    #output {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      background: #f8f8f8;
+      padding: 10px;
+      border-left: 4px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>2025-05-25のダーツ日記</h1>
+  <label>レーティング: <input id="rating" type="number" step="0.1"></label>
+  <label>01 PPD: <input id="ppd" type="number" step="0.1"></label>
+  <label>クリケット MPR: <input id="mpr" type="number" step="0.1"></label>
+  <label>カウントアップ: <input id="countup" type="number" step="1"></label>
+  <label>勝率 (%): <input id="winrate" type="number" step="1"></label>
+  <label>日記内容: <textarea id="diary" rows="5"></textarea></label>
+  <button onclick="save()">保存</button>
+
+  <canvas id="chart"></canvas>
+  <div id="output"></div>
+
+  <script>
+    const date = "2025-05-25";
+    const chartEl = document.getElementById('chart');
+    const outputEl = document.getElementById('output');
+
+    function save() {
+      const rating = parseFloat(document.getElementById('rating').value);
+      const ppd = parseFloat(document.getElementById('ppd').value);
+      const mpr = parseFloat(document.getElementById('mpr').value);
+      const countup = parseInt(document.getElementById('countup').value);
+      const winrate = parseInt(document.getElementById('winrate').value);
+      const diary = document.getElementById('diary').value;
+
+      const data = { rating, ppd, mpr, countup, winrate, diary };
+      localStorage.setItem(date, JSON.stringify(data));
+      show(data);
+    }
+
+    function show(data) {
+      outputEl.innerText = "日記内容:\n" + data.diary;
+
+      new Chart(chartEl, {
+        type: 'radar',
+        data: {
+          labels: ['レーティング', '01 PPD', 'クリケット MPR', 'カウントアップ', '勝率'],
+          datasets: [{
+            label: date,
+            data: [data.rating, data.ppd, data.mpr, data.countup, data.winrate],
+            backgroundColor: 'rgba(0, 123, 255, 0.2)',
+            borderColor: 'rgba(0, 123, 255, 1)',
+            borderWidth: 2,
+            pointBackgroundColor: 'rgba(0, 123, 255, 1)'
+          }]
+        },
+        options: {
+          scales: {
+            r: {
+              min: 0,
+              max: 1000,
+              ticks: {
+                stepSize: 100
+              },
+              pointLabels: {
+                font: {
+                  size: 14
+                }
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+    }
+
+    const saved = localStorage.getItem(date);
+    if (saved) {
+      const data = JSON.parse(saved);
+      document.getElementById('rating').value = data.rating;
+      document.getElementById('ppd').value = data.ppd;
+      document.getElementById('mpr').value = data.mpr;
+      document.getElementById('countup').value = data.countup;
+      document.getElementById('winrate').value = data.winrate;
+      document.getElementById('diary').value = data.diary;
+      show(data);
+    }
+  </script>
+</body>
+</html>
