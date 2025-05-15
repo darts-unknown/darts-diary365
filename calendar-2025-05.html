@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>2025年5月のダーツ日記カレンダー</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
@@ -55,10 +55,10 @@
 <body>
   <h1>2025年5月のダーツ日記</h1>
 
-  <!-- 📊 レーダーチャート -->
+  <!-- レーダーチャート -->
   <canvas id="myRadarChart"></canvas>
 
-  <!-- 📅 カレンダー -->
+  <!-- カレンダー -->
   <table>
     <caption>2025年5月</caption>
     <thead>
@@ -67,8 +67,98 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td></td><td></td><td></td><td></td><td><a href="2025-05-01.html">1</a></td><td><a href="2025-05-02.html">2</a></td><td><a href="2025-05-03.html">3</a></td></tr>
-      <tr><td><a href="2025-05-04.html">4</a></td><td><a href="2025-05-05.html">5</a></td><td><a href="2025-05-06.html">6</a></td><td><a href="2025-05-07.html">7</a></td><td><a href="2025-05-08.html">8</a></td><td><a href="2025-05-09.html">9</a></td><td><a href="2025-05-10.html">10</a></td></tr>
-      <tr><td><a href="2025-05-11.html">11</a></td><td><a href="2025-05-12.html">12</a></td><td><a href="2025-05-13.html">13</a></td><td><a href="2025-05-14.html">14</a></td><td><a href="2025-05-15.html">15</a></td><td><a href="2025-05-16.html">16</a></td><td><a href="2025-05-17.html">17</a></td></tr>
-      <tr><td><a href="2025-05-18.html">18</a></td><td><a href="2025-05-19.html">19</a></td><td><a href="2025-05-20.html">20</a></td><td><a href="2025-05-21.html">21</a></td><td><a href="2025-05-22.html">22</a></td><td><a href="2025-05-23.html">23</a></td><td><a href="2025-05-24.html">24</a></td></tr>
-      <tr><td><a href="2025-05-25.html">25</
+      <tr>
+        <td></td><td></td><td></td><td></td>
+        <td><a href="2025-05-01.html">1</a></td>
+        <td><a href="2025-05-02.html">2</a></td>
+        <td><a href="2025-05-03.html">3</a></td>
+      </tr>
+      <tr>
+        <td><a href="2025-05-04.html">4</a></td>
+        <td><a href="2025-05-05.html">5</a></td>
+        <td><a href="2025-05-06.html">6</a></td>
+        <td><a href="2025-05-07.html">7</a></td>
+        <td><a href="2025-05-08.html">8</a></td>
+        <td><a href="2025-05-09.html">9</a></td>
+        <td><a href="2025-05-10.html">10</a></td>
+      </tr>
+      <tr>
+        <td><a href="2025-05-11.html">11</a></td>
+        <td><a href="2025-05-12.html">12</a></td>
+        <td><a href="2025-05-13.html">13</a></td>
+        <td><a href="2025-05-14.html">14</a></td>
+        <td><a href="2025-05-15.html">15</a></td>
+        <td><a href="2025-05-16.html">16</a></td>
+        <td><a href="2025-05-17.html">17</a></td>
+      </tr>
+      <tr>
+        <td><a href="2025-05-18.html">18</a></td>
+        <td><a href="2025-05-19.html">19</a></td>
+        <td><a href="2025-05-20.html">20</a></td>
+        <td><a href="2025-05-21.html">21</a></td>
+        <td><a href="2025-05-22.html">22</a></td>
+        <td><a href="2025-05-23.html">23</a></td>
+        <td><a href="2025-05-24.html">24</a></td>
+      </tr>
+      <tr>
+        <td><a href="2025-05-25.html">25</a></td>
+        <td><a href="2025-05-26.html">26</a></td>
+        <td><a href="2025-05-27.html">27</a></td>
+        <td><a href="2025-05-28.html">28</a></td>
+        <td><a href="2025-05-29.html">29</a></td>
+        <td><a href="2025-05-30.html">30</a></td>
+        <td><a href="2025-05-31.html">31</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="text-align:center;"><a href="index.html">← トップページへ戻る</a></p>
+
+  <script>
+    const ctx = document.getElementById('myRadarChart');
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['レーティング', '01 PPD', 'クリケット MPR', 'カウントアップ', '勝率'],
+        datasets: [{
+          label: '2025年5月',
+          data: [
+            20 / 30 * 100,     // レーティング (最大30)
+            34.5 / 50 * 100,   // 01 PPD (最大50)
+            3.8 / 9 * 100,     // クリケット MPR (最大9)
+            720 / 1440 * 100,  // カウントアップ (最大1440)
+            65                 // 勝率 (%) そのまま
+          ],
+          backgroundColor: 'rgba(0, 123, 255, 0.2)',
+          borderColor: 'rgba(0, 123, 255, 1)',
+          borderWidth: 2,
+          pointBackgroundColor: 'rgba(0, 123, 255, 1)'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          r: {
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20,
+              color: '#333'
+            },
+            pointLabels: {
+              font: {
+                size: 14
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
