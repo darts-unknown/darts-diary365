@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>2025年5月2日の日記入力フォーム</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>2025年5月2日の日記入力フォーム</h1>
+  
+  <form id="diaryForm">
+    <label>01 PPD: <input type="number" step="0.01" name="ppd" required></label><br><br>
+    <label>クリケット MPR: <input type="number" step="0.01" name="mpr" required></label><br><br>
+    <label>カウントアップ: <input type="number" name="countup" required></label><br><br>
+    <label>勝率 (%): <input type="number" step="0.01" name="winrate" required></label><br><br>
+    <label>コメント:<br><textarea name="comment" rows="5" cols="40"></textarea></label><br><br>
+    <button type="submit">保存</button>
+  </form>
+
+  <p><a href="calendar-2025-05.html">← 5月カレンダーに戻る</a></p>
+  <p><a href="index.html">← トップページに戻る</a></p>
+
+  <script>
+    const form = document.getElementById('diaryForm');
+    const storageKey = 'diary-2025-05-01'; // ローカルストレージのキー名（保存用）
+
+    // ページ読み込み時に保存済みデータがあればフォームにセット
+    window.onload = () => {
+      const savedData = localStorage.getItem(storageKey);
+      if (savedData) {
+        const data = JSON.parse(savedData);
+        for (const key in data) {
+          if (form.elements[key]) {
+            form.elements[key].value = data[key];
+          }
+        }
+      }
+    };
+
+    // フォーム送信時（保存処理）
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const data = {};
+      for (const element of form.elements) {
+        if (element.name) {
+          data[element.name] = element.value;
+        }
+      }
+      localStorage.setItem(storageKey, JSON.stringify(data));
+      alert('保存しました！');
+    };
+  </script>
+</body>
+</html>
