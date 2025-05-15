@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ダーツ日記HTMLジェネレーター</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    textarea, input { width: 100%; padding: 8px; margin-top: 4px; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+    pre { background: #f4f4f4; padding: 15px; margin-top: 30px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+
+  <h1>ダーツ日記 HTMLジェネレーター</h1>
+
+  <label>日付（例：2025-05-14）</label>
+  <input type="text" id="date">
+
+  <label>レーティング</label>
+  <input type="number" id="rating" step="0.1">
+
+  <label>01 PPD</label>
+  <input type="number" id="ppd" step="0.1">
+
+  <label>クリケット MPR</label>
+  <input type="number" id="mpr" step="0.1">
+
+  <label>カウントアップ</label>
+  <input type="number" id="countup">
+
+  <label>勝率 (%)</label>
+  <input type="number" id="winrate" step="0.1">
+
+  <label>メモ（日記内容など）</label>
+  <textarea id="memo" rows="5"></textarea>
+
+  <button onclick="generateHTML()">HTML生成</button>
+
+  <h2>生成されたHTML：</h2>
+  <pre id="output"></pre>
+
+  <script>
+    function generateHTML() {
+      const date = document.getElementById('date').value;
+      const rating = document.getElementById('rating').value;
+      const ppd = document.getElementById('ppd').value;
+      const mpr = document.getElementById('mpr').value;
+      const countup = document.getElementById('countup').value;
+      const winrate = document.getElementById('winrate').value;
+      const memo = document.getElementById('memo').value;
+
+      const html = `<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>${date} - ダーツ日記</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+    canvas { max-width: 500px; margin: 20px auto; display: block; }
+    .stats { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>${date} - ダーツ日記</h1>
+
+  <div class="stats">
+    <p><strong>レーティング：</strong>${rating}</p>
+    <p><strong>01平均：</strong>${ppd} PPD</p>
+    <p><strong>クリケット平均：</strong>${mpr} MPR</p>
+    <p><strong>カウントアップ平均：</strong>${countup}</p>
+    <p><strong>勝率：</strong>${winrate}%</p>
+  </div>
+
+  <canvas id="radarChart"></canvas>
+
+  <script>
+    const ctx = document.getElementById('radarChart');
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['レーティング', '01 PPD', 'クリケット MPR', 'カウントアップ', '勝率'],
+        datasets: [{
+          label: '${date}',
+          data: [${rating}, ${ppd}, ${mpr}, ${countup}, ${winrate}],
+          backgroundColor: 'rgba(0, 123, 255, 0.2)',
+          borderColor: 'rgba(0, 123, 255, 1)',
+          pointBackgroundColor: 'rgba(0, 123, 255, 1)'
+        }]
+      },
+      options: {
+        scales: {
+          r: {
+            min: 0,
+            max: 100,
+            ticks: { color: '#333' },
+            pointLabels: { font: { size: 14 } }
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  </script>
+
+  <h2>メモ</h2>
+  <p>${memo.replace(/\n/g, '<br>')}</p>
+
+  <p><a href="index.html">← トップページへ戻る</a></p>
+</body>
+</html>`;
+
+      document.getElementById('output').textContent = html;
+    }
+  </script>
+</body>
+</html>
